@@ -45,6 +45,9 @@ def load_words():
     return wordlist
 
 
+word_list = load_words()
+
+
 def get_frequency_dict(sequence):
     """
     Returns a dictionary where the keys are elements of the sequence
@@ -266,46 +269,45 @@ def play_hand(hand: dict, word_list: list):
       returns: the total score for the hand
 
     """
+    score = 0
 
-    # BEGIN PSEUDOCODE <-- Remove this comment when you implement this function
-    # Keep track of the total score
+    while calculate_handlen(hand) > 0:
 
-    # As long as there are still letters left in the hand:
+        display_hand(hand)
 
-    # Display the hand
+        word = input('Enter word, or "!!" to indicate that you are finished: ')
 
-    # Ask user for input
+        if word == '!!':
+            break
 
-    # If the input is two exclamation points:
+        if is_valid_word(word, hand, word_list):
+            score_earned = get_word_score(word, calculate_handlen(hand))
+            score += score_earned
+            print(f'"{word}" earned {score_earned} points. Total: {score} points\n')
 
-    # End the game (break out of the loop)
+        else:
+            print('That is not a valid word. Please choose another word.\n')
 
-    # Otherwise (the input is not two exclamation points):
+        hand = update_hand(hand, word)
 
-    # If the word is valid:
+    if word == '!!':
+        print(f'Total score: {score} points')
+    else:
+        print(f'Ran out of letters. Total score: {score} points ')
 
-    # Tell the user how many points the word earned,
-    # and the updated total score
+        # Return the total score as result of function
 
-    # Otherwise (the word is not valid):
-    # Reject invalid word (print a message)
+        #
+        # Problem #6: Playing a game
+        #
 
-    # update the user's hand by removing the letters of their inputted word
-
-    # Game is over (user entered '!!' or ran out of letters),
-    # so tell user the total score
-
-    # Return the total score as result of function
-
-
-#
-# Problem #6: Playing a game
-#
+        #
+        # procedure you will use to substitute a letter in a hand
+        #
 
 
-#
-# procedure you will use to substitute a letter in a hand
-#
+play_hand({'c': 1, 'o': 1, '*': 1, 'w': 1, 's': 1, 'z': 1, 'y': 2}, word_list)
+
 
 def substitute_hand(hand, letter):
     """ 
@@ -365,7 +367,8 @@ def play_game(word_list):
     """
 
     # TO DO... Remove this line when you implement this function
-    print("play_game not implemented.")
+    # print("play_game not implemented.")
+    pass
 
 
 #
