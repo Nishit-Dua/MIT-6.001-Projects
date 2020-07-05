@@ -155,7 +155,9 @@ def deal_hand(n: int):
         x = random.choice(VOWELS)
         hand[x] = hand.get(x, 0) + 1
 
-    for i in range(num_vowels, n):
+    hand['*'] = 1
+
+    for i in range(num_vowels + 1, n):
         x = random.choice(CONSONANTS)
         hand[x] = hand.get(x, 0) + 1
 
@@ -376,6 +378,7 @@ def play_game(word_list: list):
                 letter = input('Which letter would you like to replace: ')
                 if letter in hand.keys():
                     hand = substitute_hand(hand, letter)
+                    print('')
                     SUBSTITUTED = True
                 else:
                     print(
